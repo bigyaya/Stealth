@@ -80,11 +80,11 @@ public class ThirdPersonMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
             // gestion de la vitesse de déplacement
-    if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 currentSpeed = runSpeed;
             }
-            else if (Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKey(KeyCode.C))
             {
                 currentSpeed = crouchSpeed;
 
@@ -98,7 +98,6 @@ public class ThirdPersonMovement : MonoBehaviour
             }
             else
             {
-                currentSpeed = walkSpeed;
 
                 //gestion de l'accroupissement
                 if (isCrouching)
@@ -107,6 +106,8 @@ public class ThirdPersonMovement : MonoBehaviour
                     controller.center = new Vector3(0f, standHeight / 2f, 0f);
                     isCrouching = false;
                 }
+                currentSpeed = walkSpeed;
+
             }
 
             controller.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
