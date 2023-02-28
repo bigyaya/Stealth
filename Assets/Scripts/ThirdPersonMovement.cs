@@ -19,15 +19,25 @@ public class ThirdPersonMovement : MonoBehaviour
     //saut
     public float jumpHeight = 3f;
 
-    public float speed = 6f;
+    //vitesse de déplacement
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
+    private float currentSpeed;
+    public float crouchSpeed = 3f;
 
     //caméra rotation
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
 
+    //gestion de l'accroupissement
+    private bool isCrouching = false;
+    public float crouchHeight = 1f;
+    public float standHeight = 2f;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        currentSpeed = walkSpeed; //initialisation de la vitesse de déplacement
     }
 
 
@@ -68,7 +78,39 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            // gestion de la vitesse de déplacement
+    if (Input.GetKey(KeyCode.LeftShift))
+            {
+                currentSpeed = runSpeed;
+            }
+            else if (Input.GetKey(KeyCode.LeftControl))
+            {
+                currentSpeed = crouchSpeed;
+
+                //gestion de l'accroupissement
+                if (!isCrouching)
+                {
+                    controller.height = crouchHeight;
+                    controller.center = new Vector3(0f, crouchHeight / 2f, 0f);
+                    isCrouching = true;
+                }
+            }
+            else
+            {
+                currentSpeed = walkSpeed;
+
+                //gestion de l'accroupissement
+                if (isCrouching)
+                {
+                    controller.height = standHeight;
+                    controller.center = new Vector3(0f, standHeight / 2f, 0f);
+                    isCrouching = false;
+                }
+            }
+
+            controller.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
         }
     }
+
 }
