@@ -23,16 +23,10 @@ public class ThirdPersonMovement : MonoBehaviour
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     private float currentSpeed;
-    public float crouchSpeed = 3f;
 
     //caméra rotation
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
-
-    //gestion de l'accroupissement
-    private bool isCrouching = false;
-    public float crouchHeight = 1f;
-    public float standHeight = 2f;
 
     void Start()
     {
@@ -79,39 +73,19 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            // gestion de la vitesse de déplacement
+            //ajoute la vitesse de course si la touche de course est appuyée
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 currentSpeed = runSpeed;
             }
-            if (Input.GetKey(KeyCode.C))
-            {
-                currentSpeed = crouchSpeed;
-
-                //gestion de l'accroupissement
-                if (!isCrouching)
-                {
-                    controller.height = crouchHeight;
-                    controller.center = new Vector3(0f, crouchHeight / 2f, 0f);
-                    isCrouching = true;
-                }
-            }
             else
             {
-
-                //gestion de l'accroupissement
-                if (isCrouching)
-                {
-                    controller.height = standHeight;
-                    controller.center = new Vector3(0f, standHeight / 2f, 0f);
-                    isCrouching = false;
-                }
                 currentSpeed = walkSpeed;
-
             }
 
             controller.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
         }
     }
+
 
 }
