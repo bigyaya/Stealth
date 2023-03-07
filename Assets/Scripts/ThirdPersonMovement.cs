@@ -7,6 +7,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public CharacterController controller;
     public Transform cam;
+    public Animator animator;
+
 
     //gravité
     Vector3 velocity;
@@ -38,7 +40,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void Update()
     {
 
-        //gère le gravité
+        //gère la gravité
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
@@ -48,19 +50,48 @@ public class ThirdPersonMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsGrounded", true);
         }
 
         //gère le saut
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            // Définit le paramètre "Jump" dans l'Animator
+            animator.SetBool("IsJumping", true);
+            animator.SetBool("IsGrounded", false);
         }
+
+        //gère le sneak
+        if (Input.GetButtonDown("Sneak"))
+        {
+            if (animator.GetBool("IsSneaking"))
+            {
+                animator.SetBool("IsSneaking", false);
+            }
+            else
+            {
+                animator.SetBool("IsSneaking", true);
+            }
+        }
+
+
 
 
         //recupère les inputs
         float horirzontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+
         Vector3 direction = new Vector3(horirzontal, 0f, vertical).normalized;
+
+        // Définit la vitesse de déplacement dans l'Animator
+        float speed = direction.magnitude * currentSpeed;
+        animator.SetFloat("MoveSpeed", speed);
+
+        // Définit les paramètres SpeedX et SpeedY dans l'Animator
+        animator.SetFloat("SpeedX", Mathf.Abs(horirzontal));
+        animator.SetFloat("SpeedY", Mathf.Abs(vertical));
 
 
         //gère la rotation de la caméra
@@ -71,7 +102,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * direction.magnitude;
 
             //ajoute la vitesse de course si la touche de course est appuyée
             if (Input.GetKey(KeyCode.LeftShift))
