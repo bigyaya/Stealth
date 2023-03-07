@@ -118,8 +118,8 @@ public class ThirdPersonMovementV2 : MonoBehaviour
                 moveDir += cam.forward * Mathf.Abs(vertical) * 0.5f;
             }
 
+   
             
-
             // Définit les paramètres d'animation en fonction de la direction de déplacement
             animator.SetFloat("SpeedX", moveDir.x);
             animator.SetFloat("SpeedY", moveDir.z);
@@ -142,53 +142,3 @@ public class ThirdPersonMovementV2 : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-////gère la rotation de la caméra
-//if (direction.magnitude >= 0.1f)
-//{
-//    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-//    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-//    transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-//    //ajoute la vitesse de course si la touche de course est appuyée
-//    if (Input.GetKey(KeyCode.LeftShift))
-//    {
-//        currentSpeed = runSpeed;
-//    }
-//    else
-//    {
-//        currentSpeed = walkSpeed;
-//    }
-
-//    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * direction.magnitude;
-
-//    //gère le mouvement latéral
-//    Vector3 moveDire = Vector3.zero;
-//    if (horizontal != 0)
-//    {
-//        float lateralAngle = cam.eulerAngles.y + (horizontal > 0 ? 90f : -90f);
-//        moveDir += Quaternion.Euler(0f, lateralAngle, 0f) * Vector3.forward * Mathf.Abs(horizontal);
-//    }
-//    if (vertical != 0)
-//    {
-//        moveDir += Quaternion.Euler(0f, cam.eulerAngles.y, 0f) * Vector3.forward * (vertical > 0 ? 1 : -1);
-//    }
-
-//    controller.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
-
-//}
-//else
-//{
-//    currentSpeed = 0f;
-//}
-
-////fait toujours face à la direction de la caméra
-//transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
