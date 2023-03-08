@@ -83,7 +83,22 @@ public class ThirdPersonMovement : MonoBehaviour
         float horirzontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+        float cameraHorizontal = Input.GetAxisRaw("JoystickRightHorizontal");
+        float cameraVertical = Input.GetAxisRaw("JoystickRightVertical");
+
+        // Fait tourner la caméra en fonction des axes du joystick droit
+        //transform.Rotate(Vector3.up, cameraHorizontal * Time.deltaTime * turnSmoothVelocity);
+        //transform.Rotate(Vector3.right, cameraVertical * Time.deltaTime * turnSmoothVelocity);
+
+
         Vector3 direction = new Vector3(horirzontal, 0f, vertical).normalized;
+
+        // Arrête l'animation "sneak" si le joueur ne bouge pas
+        if (direction.magnitude < 0.1f && animator.GetBool("IsSneaking"))
+        {
+            animator.SetBool("IsSneaking", false);
+
+        }
 
         // Définit la vitesse de déplacement dans l'Animator
         float speed = direction.magnitude * currentSpeed;
@@ -92,6 +107,9 @@ public class ThirdPersonMovement : MonoBehaviour
         // Définit les paramètres SpeedX et SpeedY dans l'Animator
         animator.SetFloat("SpeedX", Mathf.Abs(horirzontal));
         animator.SetFloat("SpeedY", Mathf.Abs(vertical));
+
+        //animator.SetBool("IsRunning", speed > walkSpeed);
+
 
 
         //gère la rotation de la caméra
@@ -104,8 +122,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * direction.magnitude;
 
-            //ajoute la vitesse de course si la touche de course est appuyée
-            if (Input.GetKey(KeyCode.LeftShift))
+            // Ajoute la vitesse de course si la touche LeftShift est appuyée ou si le joystick gauche est poussé à fond
+            if (Input.GetKey(KeyCode.LeftShift) /*|| Input.GetAxisRaw("Run") > 0f*/)
             {
                 currentSpeed = runSpeed;
             }
@@ -116,6 +134,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
             controller.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
         }
+
+
+
+
     }
 
 
