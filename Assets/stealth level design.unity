@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.4512062, g: 0.5009471, b: 0.5736682, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -307,14 +307,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390296761}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.51397395, y: -0.54535365, z: -0.12233397, w: 0.6507339}
+  m_LocalPosition: {x: 0, y: 122.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.377, y: -98.385, z: -58.463}
 --- !u!43 &500215542
 Mesh:
   m_ObjectHideFlags: 0
@@ -2396,17 +2396,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 1628932092}
   m_VersionIndex: 1844
   m_IsSelectable: 1
-  m_SelectedFaces: 0f000000
-  m_SelectedEdges:
-  - a: 60
-    b: 61
-  - a: 62
-    b: 60
-  - a: 61
-    b: 63
-  - a: 63
-    b: 62
-  m_SelectedVertices: 3c0000003d0000003e0000003f000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &2062267078
 Transform:
   m_ObjectHideFlags: 0

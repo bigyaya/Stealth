@@ -78,13 +78,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
 
 
-
-        //recupère les inputs
-        float horirzontal = Input.GetAxisRaw("Horizontal");
+    //recupère les inputs
+    float horirzontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        float cameraHorizontal = Input.GetAxisRaw("JoystickRightHorizontal");
-        float cameraVertical = Input.GetAxisRaw("JoystickRightVertical");
+        //float cameraHorizontal = Input.GetAxisRaw("JoystickRightHorizontal");
+        //float cameraVertical = Input.GetAxisRaw("JoystickRightVertical");
 
         // Fait tourner la caméra en fonction des axes du joystick droit
         //transform.Rotate(Vector3.up, cameraHorizontal * Time.deltaTime * turnSmoothVelocity);
@@ -97,6 +96,7 @@ public class ThirdPersonMovement : MonoBehaviour
         if (direction.magnitude < 0.1f && animator.GetBool("IsSneaking"))
         {
             animator.SetBool("IsSneaking", false);
+            animator.SetBool("IsCrouching", true);
 
         }
 
