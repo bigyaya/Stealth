@@ -9,7 +9,7 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float rotateSpeed;       // La vitesse de rotation de la caméra
     [SerializeField] private Light spotlight;         // La source de lumière de la caméra
 
-    [SerializeField] public AudioSource alarmSound;   // Un son d'alarme à jouer lorsque le joueur est proche
+    [SerializeField] public AudioSource alarmSound;    // Un son d'alarme à jouer lorsque le joueur est proche
     [SerializeField] public float alarmDistance = 10f; // La distance à laquelle l'alarme doit être déclenchée
 
     private bool rightToLeft = true;                   // Un booléen pour savoir si la caméra doit aller de la droite à la gauche
@@ -32,13 +32,13 @@ public class CameraBehavior : MonoBehaviour
             float distance = Vector3.Distance(transform.position, playerDirection.position);    // Calcul la distance entre la caméra et le joueur
             if (distance > alarmDistance)     // Si la distance est supérieure à la distance d'alarme
             {
-                playerDirection = null;      // Le joueur n'est plus repéré
+                playerDirection = null;             // Le joueur n'est plus repéré
                 spotlight.color = Color.white;      // La source de lumière est blanche
             }
             else // Sinon, si le joueur est à portée
             {
                 transform.LookAt(playerDirection.position);      // La caméra regarde dans la direction du joueur
-                if (!alarmSound.isPlaying)      // Si le son d'alarme n'est pas en train d'être joué
+                if (!alarmSound.isPlaying)                       // Si le son d'alarme n'est pas en train d'être joué
                 {
                     alarmSound.PlayOneShot(alarmSound.clip);      // Joue le son d'alarme une seule fois
                 }
@@ -48,7 +48,7 @@ public class CameraBehavior : MonoBehaviour
         else // Si la direction du joueur n'est pas connue
         {
             alarmSound.Stop();      // Arrête le son d'alarme
-            PingpongCam();      // Fait bouger la caméra de gauche à droite
+            PingpongCam();          // Fait bouger la caméra de gauche à droite
         }
     }
 
@@ -57,8 +57,8 @@ public class CameraBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))      // Si l'objet est le joueur
         {
-            playerDirection = other.transform;      // Stocke la direction du joueur
-            spotlight.color = Color.red;      // La source de lumière est rouge
+            playerDirection = other.transform;            // Stocke la direction du joueur
+            spotlight.color = Color.red;                  // La source de lumière est rouge
             alarmSound.PlayOneShot(alarmSound.clip);      // Joue le son d'alarme une seule fois
         }
     }
