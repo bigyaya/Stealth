@@ -78,7 +78,7 @@ MonoBehaviour:
     m_Value: 0
   aerosolTint:
     m_OverrideState: 1
-    m_Value: {r: 0.9811321, g: 0.6337612, b: 0.336917, a: 1}
+    m_Value: {r: 0.98039216, g: 0.64808744, b: 0.33725494, a: 1}
   aerosolMaximumAltitude:
     m_OverrideState: 0
     m_Value: 8289.296
@@ -123,7 +123,7 @@ MonoBehaviour:
     m_Value: 1
   horizonTint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.74843353, b: 0.5686275, a: 1}
+    m_Value: {r: 1, g: 0.7377395, b: 0.5686275, a: 1}
   zenithTint:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -161,7 +161,7 @@ MonoBehaviour:
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
+    m_Value: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
   maxFogDistance:
     m_OverrideState: 0
     m_Value: 5000.1
@@ -176,13 +176,13 @@ MonoBehaviour:
     m_Value: 1000
   baseHeight:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: -0.68
   maximumHeight:
-    m_OverrideState: 0
-    m_Value: 76.91
+    m_OverrideState: 1
+    m_Value: 65.2
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 398.88
+    m_Value: 398.32
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_Value: 1
   windOrientation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 114
   windSpeed:
     m_OverrideState: 1
     m_Value: 100
